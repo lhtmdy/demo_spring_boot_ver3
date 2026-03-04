@@ -1,0 +1,22 @@
+{
+  "id": 1,
+  "name": "Test User",
+  "score": 95.5,
+  "graduated": true,
+  "age": null,
+  "courseList": ["Math", "Science", "History"]
+  "pet": {
+    "name": "Buddy",
+    "age": 5
+  },
+  "petList": [
+    {
+      "name": "Buddy",
+      "age": 5
+    },
+    {
+      "name": "Mittens",
+      "age": 3
+    }
+  ]
+}
