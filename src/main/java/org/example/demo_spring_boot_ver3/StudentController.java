@@ -1,32 +1,40 @@
 package org.example.demo_spring_boot_ver3;
 
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 @RestController
 public class StudentController {
-    @PostMapping("/students")
-//    @RequestMapping(value = "/students", method = RequestMethod.POST)
-    public String create(@RequestBody @Valid Student student){
-//        if(student.getId() ==null){
-//            throw new RuntimeException("id 不可為null");
-//        }
-        return "執行資料庫create操作";
+
+    @Autowired
+    private NamedParameterJdbcTemplate  namedParameterJdbcTemplate;
+
+    @PostMapping("/insertStudents")
+    public String insert (@RequestBody Student student){
+        String sql = "INSERT INTO student(id,name) VALUE(:studentId,:studentName)";
+        Map<String, Object> map = new HashMap<>();
+
+        map.put("studentId",student.getId());
+        map.put("studentName",student.getName());
+
+        namedParameterJdbcTemplate.update(sql,map);
+        return "執行INSERT SQL";
+
     }
 
-    @GetMapping("/students/{studentId}")
-    public String read(@PathVariable Integer studentId){
-        return "執行資料庫的 Read 操作";
-    }
+    @DeleteMapping("/deleteStudent/{studentId}")
+    public String delete (@PathVariable Integer studentId){
+        String sql = "Delete FROM student WHERE id = :studentId";
+        Map<String, Object> map = new HashMap<>();
 
-    @PutMapping("/students/{studentId}")
-    public String update(@PathVariable Integer studentId,
-                         @RequestBody Student student){
-        return "執行資料庫Update 操作";
-    }
-
-    @DeleteMapping("/stdents/{studentId}")
-    public String delete(@PathVariable Integer studentId){
-        return  "執行資料庫的Delete操作";
+        map.put("studentId",studentId);
+        namedParameterJdbcTemplate.update(sql,map);
+        return "執行delete sql";
     }
 }
