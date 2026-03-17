@@ -1,4 +1,4 @@
-package org.example.demo_spring_boot_ver3;
+package org.example.demo_spring_boot_ver3.model;
 
 
 import jakarta.validation.constraints.NotBlank;
