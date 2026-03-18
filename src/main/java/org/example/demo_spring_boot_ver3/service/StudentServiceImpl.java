@@ -3,11 +3,11 @@ package org.example.demo_spring_boot_ver3.service;
 import org.example.demo_spring_boot_ver3.model.Student;
 import org.example.demo_spring_boot_ver3.dao.StudentDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service
 public class StudentServiceImpl implements  StudentService {
 
     @Autowired
